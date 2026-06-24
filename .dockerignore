@@ -1,0 +1,14 @@
+# keep the build context small + reproducible
+**/node_modules
+**/dist
+**/.vite
+**/.env
+**/.env.*
+**/data
+.git
+.github
+chats
+project
+README.md
+*.local
+**/.DS_Store

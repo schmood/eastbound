@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <title>Eastbound — Maritimes Trip</title>
+  <meta name="theme-color" content="#2f7d44">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Eastbound">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="app.css?v=15">
+</head>
+<body>
+  <div class="shell">
+    <div class="phone">
+      <!-- status bar -->
+      <div class="statusbar">
+        <span id="sb-time">9:41</span>
+        <span class="sb-right">Eastbound&nbsp;●</span>
+      </div>
+      <!-- app screens render here (appbar + scroll area) -->
+      <div id="main" style="flex:1; display:flex; flex-direction:column; min-height:0;"></div>
+      <!-- bottom tabs -->
+      <nav class="tabbar" id="tabbar"></nav>
+      <!-- simulation control (preview the trip on any day) -->
+      <div class="simbar" id="simbar"></div>
+    </div>
+  </div>
+
+  <!-- shared trip data (single source of truth, reused from the trip site) -->
+  <script src="../js/wiki.js"></script>
+  <script src="../js/data.js"></script>
+  <script src="../js/lodging-data.js"></script>
+  <!-- companion-app data + logic -->
+  <script src="trip-days.js"></script>
+  <script src="weather-data.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer onload="window.__onGsiLoad && window.__onGsiLoad()"></script>
+  <script src="app.js?v=15"></script>
+  <script>
+    // register the service worker for offline use (no-op in the preview sandbox)
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").catch(function () {});
+      });
+    }
+  </script>
+</body>
+</html>

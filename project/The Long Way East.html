@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Long Way East — A Maritimes Road Trip</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/journey.css">
+  <link rel="stylesheet" href="css/lodging.css">
+</head>
+<body data-plan="E">
+
+  <!-- sticky progress nav -->
+  <nav class="nav" aria-label="Progress">
+    <div class="nav__brand"><b>East</b> <span>· the long way</span></div>
+    <div class="nav__track" aria-label="Stop progress"></div>
+    <div class="nav__end">Jul 29 – Aug 15</div>
+  </nav>
+
+  <!-- hero -->
+  <header class="hero" data-screen-label="Hero">
+    <div class="hero__bg"></div>
+    <div class="hero__scrim"></div>
+    <div class="hero__inner">
+      <div class="wrap">
+        <div class="hero__kicker"><span class="rule"></span><span class="eyebrow">A family road trip · Eastern Canada</span></div>
+        <h1></h1>
+        <p class="hero__sub"></p>
+        <div class="hero__plan" id="heroPlan"></div>
+        <div class="hero__stats"></div>
+      </div>
+    </div>
+    <div class="hero__cue"><span>Follow the route</span><span class="dot"></span></div>
+  </header>
+
+  <!-- route map -->
+  <section class="map-sec" id="map" data-screen-label="Route map">
+    <div class="wrap">
+      <div class="map-sec__head reveal"></div>
+      <div class="map-stage reveal d1" id="mapStage"></div>
+      <div class="map-legend reveal d2">
+        <span class="map-legend__item"><span class="map-legend__line map-legend__line--out"></span>The journey out &amp; the coast</span>
+        <span class="map-legend__item"><span class="map-legend__line map-legend__line--home"></span>The drive home</span>
+        <span class="map-legend__item"><span class="map-legend__home">⌂</span>Kitchener · start &amp; finish</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- stops + drives + planning injected here per plan -->
+  <main id="journey"></main>
+
+  <footer class="foot">
+    <p>Made to picture the trip together · imagery from <b>Wikimedia Commons</b> · a planning sketch, not a booking.</p>
+  </footer>
+
+  <!-- lightbox -->
+  <div class="lb" role="dialog" aria-label="Image viewer">
+    <span class="lb__x" aria-label="Close">&times;</span>
+    <img alt="">
+    <div class="lb__cap"></div>
+  </div>
+
+  <script src="js/wiki.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/lodging-data.js"></script>
+  <script src="js/lodging.js"></script>
+  <script src="js/journey.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+# Eastbound — deploy on the Ubuntu box. Pulls the image GitHub Actions pushes
+# to ghcr.io/schmood/eastbound and serves it on 127.0.0.1:8090, where your
+# reverse proxy (Caddy/nginx) for eastcoast.undergruhn.com forwards TLS traffic.
+#
+#   1. Put FAMILY_PASSWORD in a .env file next to this compose file.
+#   2. docker compose pull && docker compose up -d
+#
+# To build locally instead of pulling, uncomment `build: .` and run `docker compose up -d --build`.
+
+services:
+  eastbound:
+    image: ghcr.io/schmood/eastbound:latest
+    # build: .
+    container_name: eastbound
+    restart: unless-stopped
+    environment:
+      - FAMILY_PASSWORD=${FAMILY_PASSWORD:?set FAMILY_PASSWORD in .env}
+      - PORT=8080
+      - DATA_DIR=/data
+    ports:
+      - "127.0.0.1:8090:8080"
+    volumes:
+      - eastbound-data:/data
+
+volumes:
+  eastbound-data:

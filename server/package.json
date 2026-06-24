@@ -1,0 +1,17 @@
+{
+  "name": "eastbound-server",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Eastbound — shared family-journal API + static host for the built frontend.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "express": "^4.21.2"
+  },
+  "engines": { "node": ">=20" }
+}

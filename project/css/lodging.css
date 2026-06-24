@@ -1,0 +1,288 @@
+/* lodging.css — "Where we'll stay" blocks + planning-hub lodging summary.
+   Follows journey.css: hairline rules, small-caps labels, Newsreader/Hanken, --coral accent. */
+
+/* ---------- stop block ---------- */
+.lodge {
+  margin: clamp(28px, 4vw, 44px) 0 0;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+}
+.lodge__head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.lodge__dates {
+  font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.lodge__intro {
+  font-family: var(--font-display); font-style: italic;
+  color: var(--ink-soft); font-size: 1.02rem; line-height: 1.55;
+  max-width: 62ch; margin: 6px 0 4px;
+}
+.lodge__note {
+  margin: 8px 0 2px;
+  font-family: var(--font-display); font-style: italic;
+  font-size: .95rem; line-height: 1.55;
+  color: var(--coral-deep);
+  max-width: 62ch;
+}
+.lodge__warn {
+  display: flex; align-items: baseline; gap: 12px;
+  margin: 10px 0 4px; padding: 10px 0;
+  border-top: 1px solid #c79a4b; border-bottom: 1px solid #c79a4b;
+  color: #7a5a1d; font-size: .92rem; line-height: 1.55;
+}
+.lodge__warn span {
+  flex: none;
+  font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  color: #9a6f1f;
+}
+
+/* ---------- cards (ruled rows, not boxes) ---------- */
+.lodge__list { margin-top: 10px; }
+.lg-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 92px 120px 118px 64px;
+  gap: 8px 18px; align-items: center;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+.lg-card:first-child { border-top-width: 0; }
+.lg-card__top { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.lg-card__name {
+  font-family: var(--font-display); font-size: 1.18rem; font-weight: 500;
+  line-height: 1.25; color: var(--ink);
+}
+.lg-badge {
+  font-size: .62rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink-faint);
+  border: 1px solid var(--line); border-radius: 2px;
+  padding: 2px 7px 1px;
+  white-space: nowrap;
+}
+.lg-pick {
+  font-size: .66rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--coral-deep); white-space: nowrap;
+}
+.lg-card__why {
+  font-size: .9rem; line-height: 1.5; color: var(--ink-soft);
+  margin-top: 2px; max-width: 56ch;
+  text-wrap: pretty;
+}
+.lg-rate { font-size: .92rem; font-weight: 600; color: var(--ink); white-space: nowrap; }
+.lg-rate span { font-weight: 400; color: var(--ink-faint); font-size: .8rem; }
+.lg-rate--none { color: var(--ink-faint); font-weight: 400; }
+.lg-price { text-align: right; line-height: 1.25; }
+.lg-price b { font-family: var(--font-display); font-size: 1.22rem; font-weight: 500; }
+.lg-price span { display: block; font-size: .74rem; color: var(--ink-faint); letter-spacing: .04em; }
+
+/* status chip — click to cycle Considering → Shortlisted → Booked → Backup */
+.lg-status {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  width: 100%;
+  font-family: var(--font-body); font-size: .68rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-faint);
+  background: none; border: 1px solid var(--line); border-radius: 99px;
+  padding: 7px 10px; cursor: pointer;
+  transition: color .25s var(--ease), border-color .25s var(--ease), background-color .25s var(--ease);
+}
+.lg-status:hover { border-color: var(--ink-faint); color: var(--ink-soft); }
+.lg-status__check { display: none; width: 11px; height: 11px; }
+.lg-status__check path { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.lg-status[data-st="shortlisted"] { color: var(--spruce); border-color: var(--spruce-mid); }
+.lg-status[data-st="backup"] { color: var(--gold); border-color: var(--gold); border-style: dashed; }
+.lg-status[data-st="booked"] {
+  color: var(--paper); background: var(--coral); border-color: var(--coral);
+}
+.lg-status[data-st="booked"] .lg-status__check { display: block; }
+
+/* booked card: quiet confirmed treatment */
+.lg-card[data-st="booked"] .lg-card__name { color: var(--coral-deep); }
+.lg-card[data-st="booked"] { background: linear-gradient(to right, transparent, rgba(0,0,0,.018), transparent); }
+
+.lg-view {
+  font-size: .78rem; font-weight: 600; letter-spacing: .06em;
+  color: var(--ink-soft); text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  justify-self: end; white-space: nowrap;
+  transition: color .25s var(--ease), border-color .25s var(--ease);
+}
+.lg-view:hover { color: var(--coral-deep); border-color: var(--coral); }
+
+.lodge__fine--note {
+  margin-top: 12px; font-size: .84rem; line-height: 1.55; color: var(--ink-faint);
+  font-family: var(--font-display); font-style: italic;
+}
+.lodge__fine {
+  margin-top: 14px;
+  font-size: .64rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ---------- planning hub: lodging summary ---------- */
+.lgh { width: 100%; border-collapse: collapse; font-size: .88rem; margin-top: 10px; }
+.lgh th {
+  text-align: left; font-size: .64rem; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-faint);
+  padding: 0 10px 8px 0; border-bottom: 1px solid var(--ink-soft);
+}
+.lgh td { padding: 9px 10px 9px 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.lgh tr:last-child td { border-bottom: 0; }
+.lgh-stop { font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--line); }
+.lgh-stop:hover { color: var(--coral-deep); }
+.lgh-dates { white-space: nowrap; color: var(--ink-faint); font-size: .8rem; }
+.lgh-pick { font-family: var(--font-display); font-size: .98rem; line-height: 1.3; }
+.lgh-star { color: var(--coral-deep); font-size: .8rem; }
+.lgh-amt { font-weight: 600; white-space: nowrap; text-align: right; }
+.lgh-tbd { color: var(--ink-faint); font-style: italic; }
+.lgh .lg-status { width: auto; padding: 5px 9px; font-size: .6rem; }
+.lgh .lg-view { border-bottom: none; font-size: .9rem; }
+
+.lgh-total {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-top: 14px; padding-top: 12px; border-top: 2px solid var(--ink);
+}
+.lgh-total .lab { font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.lgh-total .amt { font-family: var(--font-display); font-size: 1.5rem; }
+.lgh-band { margin-top: 4px; font-size: .84rem; color: var(--ink-soft); font-style: italic; font-family: var(--font-display); }
+
+.lgh-callout { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 12px; }
+.lgh-callout__k {
+  font-size: .66rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--coral-deep);
+}
+.lgh-callout p { font-size: .9rem; line-height: 1.6; color: var(--ink-soft); margin-top: 6px; }
+.lgh-callout__sub { font-size: .82rem !important; color: var(--ink-faint) !important; }
+
+/* ---------- dark planning panel overrides (hub sits on var(--ink)) ---------- */
+.plan .lgh th { color: rgba(255,255,255,.5); border-bottom-color: rgba(255,255,255,.4); }
+.plan .lgh td { border-bottom-color: rgba(255,255,255,.12); }
+.plan .lgh-stop { color: var(--paper); border-bottom-color: rgba(255,255,255,.25); }
+.plan .lgh-stop:hover { color: #f0c9a0; }
+.plan .lgh-dates { color: rgba(255,255,255,.5); }
+.plan .lgh-star { color: #f0c9a0; }
+.plan .lgh-tbd { color: rgba(255,255,255,.45); }
+.plan .lgh-total { border-top-color: rgba(255,255,255,.7); }
+.plan .lgh-total .amt { color: #f0c9a0; }
+.plan .lgh-band { color: rgba(255,255,255,.72); }
+.plan .lgh-callout { border-top-color: rgba(255,255,255,.14); }
+.plan .lgh-callout__k { color: #f0c9a0; }
+.plan .lgh-callout p { color: rgba(255,255,255,.72); }
+.plan .lgh-callout__sub { color: rgba(255,255,255,.5) !important; }
+.plan .lodge__fine { color: rgba(255,255,255,.42); }
+.plan .lg-status { color: rgba(255,255,255,.6); border-color: rgba(255,255,255,.25); }
+.plan .lg-status:hover { color: rgba(255,255,255,.85); border-color: rgba(255,255,255,.5); }
+.plan .lg-status[data-st="shortlisted"] { color: #9ed4c4; border-color: #5f9c8c; }
+.plan .lg-status[data-st="backup"] { color: #d9b878; border-color: #b1873d; }
+.plan .lg-status[data-st="booked"] { color: var(--ink); background: #f0c9a0; border-color: #f0c9a0; }
+.plan .lg-view { color: rgba(255,255,255,.65); border-bottom-color: rgba(255,255,255,.25); }
+.plan .lg-view:hover { color: #f0c9a0; border-bottom-color: #f0c9a0; }
+
+/* ---------- mobile ---------- */
+@media (max-width: 860px) {
+  .lg-card {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "main main" "rate price" "status view";
+    gap: 10px 14px;
+  }
+  .lg-card__main { grid-area: main; }
+  .lg-rate { grid-area: rate; align-self: center; }
+  .lg-price { grid-area: price; }
+  .lg-status { grid-area: status; width: auto; justify-self: start; }
+  .lg-view { grid-area: view; align-self: center; }
+
+  .lgh thead { display: none; }
+  .lgh, .lgh tbody, .lgh tr, .lgh td { display: block; }
+  .lgh tr { border-bottom: 1px solid var(--line); padding: 10px 0; }
+  .lgh td { border-bottom: 0; padding: 2px 0; }
+  .lgh-amt { text-align: left; }
+}
+
+/* ============================================================
+   PLAN E — booked vs. to-book treatment
+   ============================================================ */
+.lodge__head-right { display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.lg-badge-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .64rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 100px; white-space: nowrap;
+}
+.lg-badge-status svg { width: 11px; height: 11px; }
+.lg-badge-status svg path { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.lg-badge-status.is-booked { color: #fff; background: var(--spruce); }
+.lg-badge-status.is-tobook { color: #8a6314; background: transparent; border: 1px solid var(--gold); }
+
+/* booked card — a confirmed, settled treatment */
+.lg-booked {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 16px 20px; align-items: start;
+  margin-top: 14px; padding: 20px 22px;
+  background: color-mix(in srgb, var(--spruce) 7%, var(--paper));
+  border: 1px solid color-mix(in srgb, var(--spruce) 24%, var(--line));
+  border-left: 3px solid var(--spruce);
+  border-radius: 4px;
+}
+.lg-booked__mark {
+  width: 30px; height: 30px; border-radius: 50%; background: var(--spruce); color: #fff;
+  display: grid; place-items: center; flex: none;
+}
+.lg-booked__mark svg { width: 15px; height: 15px; }
+.lg-booked__mark svg path { fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.lg-booked__top { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.lg-booked__name { font-family: var(--font-display); font-size: 1.35rem; font-weight: 500; color: var(--spruce-deep); line-height: 1.2; }
+.lg-booked__detail { font-size: .9rem; font-weight: 600; color: var(--ink-soft); margin-top: 4px; }
+.lg-booked__why { font-size: .9rem; line-height: 1.5; color: var(--ink-soft); margin-top: 6px; max-width: 54ch; text-wrap: pretty; }
+.lg-booked__side { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.lg-confirmed {
+  font-size: .64rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--spruce-mid);
+}
+
+/* to-book — estimate line, candidate shortlist, search link */
+.lodge__est { font-size: .92rem; color: var(--ink-soft); margin: 12px 0 4px; }
+.lodge__est b { color: var(--ink); font-weight: 700; }
+.lg-cand {
+  display: grid; grid-template-columns: minmax(0, 1fr) 92px 110px 60px;
+  gap: 6px 18px; align-items: center;
+  padding: 13px 0; border-top: 1px solid var(--line);
+}
+.lg-cand:first-child { border-top: 0; }
+.lg-cand__top { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.lg-cand__name { font-family: var(--font-display); font-size: 1.12rem; font-weight: 500; color: var(--ink); line-height: 1.25; }
+.lg-cand__why { font-size: .88rem; line-height: 1.5; color: var(--ink-soft); margin-top: 2px; max-width: 56ch; text-wrap: pretty; }
+.lodge__search {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 16px;
+  font-size: .76rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--coral-deep); text-decoration: none;
+  border: 1.5px solid var(--coral); border-radius: 3px; padding: 11px 18px;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.lodge__search:hover { background: var(--coral); color: #fff; }
+
+/* booking-tracker status chips (dark hub) */
+.lgh-st {
+  display: inline-block; font-size: .6rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; padding: 4px 10px; border-radius: 100px; white-space: nowrap;
+}
+.plan .lgh-st.is-booked { color: var(--ink); background: #f0c9a0; }
+.plan .lgh-st.is-tobook { color: #e6c98c; background: transparent; border: 1px solid rgba(240,201,160,.5); }
+
+@media (max-width: 860px) {
+  .lg-booked { grid-template-columns: auto 1fr; }
+  .lg-booked__side { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; text-align: left; }
+  .lg-cand { grid-template-columns: 1fr auto; grid-template-areas: "main main" "rate price" "view view"; gap: 8px 14px; }
+  .lg-cand__main { grid-area: main; }
+  .lg-cand .lg-rate { grid-area: rate; align-self: center; }
+  .lg-cand .lg-price { grid-area: price; }
+  .lg-cand .lg-view { grid-area: view; justify-self: start; }
+}
+
+/* ---------- print ---------- */
+@media print {
+  .lg-status { border-color: #999; }
+  .lg-view, .lodge__search { display: none; }
+  .lg-booked { background: #fff; border-color: #999; }
+}

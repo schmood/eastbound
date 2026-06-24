@@ -1,0 +1,15 @@
+# dependencies & build output (also covered per-package)
+node_modules/
+**/node_modules/
+**/dist/
+**/.vite/
+
+# local env + runtime data
+**/.env
+!**/.env.example
+**/data/
+server/data/
+
+# OS / editor cruft
+.DS_Store
+*.local
