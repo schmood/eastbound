@@ -1,9 +1,10 @@
-# Eastbound — deploy on the Ubuntu box. Pulls the image GitHub Actions pushes
-# to ghcr.io/schmood/eastbound and serves it on 127.0.0.1:8090, where your
-# reverse proxy (Caddy/nginx) for eastcoast.undergruhn.com forwards TLS traffic.
+# Eastbound — deploy on the Ubuntu box (beelink). Pulls the image GitHub Actions
+# pushes to ghcr.io/schmood/eastbound and serves it on 127.0.0.1:8091 (8090 is
+# already taken by sabnzbd on this box), where nginx fronts eastcoast.undergruhn.com.
 #
 #   1. Put FAMILY_PASSWORD in a .env file next to this compose file.
-#   2. docker compose pull && docker compose up -d
+#   2. mkdir -p data/confirmations   # then drop the booking PDFs here as <stop>.pdf
+#   3. docker compose pull && docker compose up -d
 #
 # To build locally instead of pulling, uncomment `build: .` and run `docker compose up -d --build`.
 
@@ -18,9 +19,10 @@ services:
       - PORT=8080
       - DATA_DIR=/data
     ports:
-      - "127.0.0.1:8090:8080"
+      - "127.0.0.1:8091:8080"
     volumes:
-      - eastbound-data:/data
-
-volumes:
-  eastbound-data:
+      # Bind-mount a host folder (next to this file) so the SQLite journal and the
+      # confirmation PDFs are easy to back up and to drop files into:
+      #   ./data/eastbound.db             — the shared journal
+      #   ./data/confirmations/<stop>.pdf — booking confirmations served at /confirmations/
+      - ./data:/data

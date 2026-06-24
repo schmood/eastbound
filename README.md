@@ -105,14 +105,19 @@ and pushes it to **`ghcr.io/schmood/eastbound:latest`** using the built-in
 
 ```bash
 # next to docker-compose.yml:
-echo "FAMILY_PASSWORD=our-long-shared-secret" > .env
+echo "FAMILY_PASSWORD=our-long-shared-secret" > .env   # the shared family password
+mkdir -p data/confirmations                            # booking-confirmation PDFs go here
+
+# (optional) copy the confirmation PDFs from your machine, each named <stop>.pdf:
+#   scp ottawa.pdf quebec.pdf halifax.pdf … you@box:/srv/eastbound/data/confirmations/
 
 docker compose pull
 docker compose up -d
 ```
 
-The container listens on `127.0.0.1:8090` (host) → `8080` (container), and notes
-persist in the `eastbound-data` volume.
+The container listens on `127.0.0.1:8091` (host) → `8080` (container). The SQLite
+journal **and** the confirmation PDFs live in `./data` next to the compose file
+(bind-mounted to `/data`) — easy to back up and to drop files into.
 
 To update after a new image is pushed: `docker compose pull && docker compose up -d`.
 
@@ -124,7 +129,7 @@ Point the subdomain's DNS at the box and add a vhost forwarding to the container
 
 ```
 eastcoast.undergruhn.com {
-    reverse_proxy 127.0.0.1:8090
+    reverse_proxy 127.0.0.1:8091
 }
 ```
 
@@ -133,7 +138,7 @@ eastcoast.undergruhn.com {
 ```nginx
 server {
     server_name eastcoast.undergruhn.com;
-    location / { proxy_pass http://127.0.0.1:8090; proxy_set_header Host $host; }
+    location / { proxy_pass http://127.0.0.1:8091; proxy_set_header Host $host; }
 }
 ```
 
