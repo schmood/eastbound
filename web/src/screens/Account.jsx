@@ -7,6 +7,7 @@ import { useTrip } from "../trip.jsx";
 import { Icon } from "../lib/icons.jsx";
 import { Screen } from "../components/Screen.jsx";
 import { SectionTitle, Avatar } from "../components/ui.jsx";
+import { PushSetting } from "../components/PushSetting.jsx";
 
 export default function Account() {
   const { user, logout } = useAuth();
@@ -54,6 +55,8 @@ export default function Account() {
           <span className="toggle__dot" />
         </button>
       </div>
+
+      <PushSetting />
 
       <p className="about-note">
         Signed in on this device. Notes you add are tagged with your name and the time, and sync to everyone’s phones through the shared family journal.

@@ -45,33 +45,26 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 
-/* ---------- phone shell (desktop simulation) ---------- */
+/* ---------- app shell (phone-first; a centered column on larger screens) ---------- */
 .shell {
   min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  padding: 0;
+  display: flex; justify-content: center;
+  background: var(--paper);
 }
 .phone {
   position: relative;
   width: 100%;
-  max-width: 100%;
+  max-width: 480px;
   height: 100vh;
   background: var(--paper);
   overflow: hidden;
   display: flex; flex-direction: column;
 }
+/* On wider screens, just sit the column on a soft backdrop with a subtle edge —
+   no fake phone frame, no notch. The app stays phone-width and centered. */
 @media (min-width: 560px) {
-  .shell { padding: 28px; background: radial-gradient(120% 120% at 50% 0%, #2c3530 0%, #1a201c 70%); }
-  .phone {
-    width: 402px; height: min(872px, calc(100vh - 56px));
-    border-radius: 46px;
-    box-shadow: var(--shadow-lg), 0 0 0 12px #15171a, 0 0 0 14px #2a2d31;
-  }
-  .phone::after { /* notch */
-    content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-    width: 132px; height: 26px; background: #15171a;
-    border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; z-index: 60;
-  }
+  .shell { background: #ece6da; }
+  .phone { box-shadow: 0 0 0 1px var(--line), 0 10px 40px rgba(30,28,20,.10); }
 }
 
 /* ---------- status / app bar ---------- */
