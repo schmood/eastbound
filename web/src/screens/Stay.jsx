@@ -9,16 +9,17 @@ import { Icon } from "../lib/icons.jsx";
 import { Screen } from "../components/Screen.jsx";
 import { SectionTitle, Pill, placeLabel } from "../components/ui.jsx";
 
-// confirmation extras — fill these in as confirmation emails arrive.
-// pdf: null = not yet added (a file dropped at /confirmations/<id>.pdf shows here).
+// confirmation extras — mirrored from East Coast Trip/trip-data.json (conf #,
+// check-in/out times). pdf paths resolve to the confirmation emails staged on the
+// server volume (server/data/confirmations/<id>.pdf, served at /confirmations/<id>.pdf).
 const CONF = {
-  ottawa:      { conf: "—", checkIn: "4:00 PM", checkOut: "11:00 AM", address: "Downtown Ottawa", phone: "", pdf: null },
-  quebec:      { conf: "—", checkIn: "4:00 PM", checkOut: "10:00 AM", address: "Old Québec (Le 201)", phone: "", pdf: null },
-  fredericton: { conf: "—", checkIn: "4:00 PM", checkOut: "11:00 AM", address: "659 Queen St, Fredericton", phone: "", pdf: null },
-  pei:         { conf: "—", checkIn: "3:00 PM", checkOut: "10:00 AM", address: "New Glasgow, PEI", phone: "", pdf: null },
-  capebreton:  { conf: "—", checkIn: "3:00 PM", checkOut: "10:00 AM", address: "Petit Étang, NS", phone: "", pdf: null },
-  halifax:     { conf: "—", checkIn: "4:00 PM", checkOut: "12:00 PM", address: "Downtown Halifax", phone: "", pdf: null },
-  edmundston:  { conf: "—", checkIn: "3:00 PM", checkOut: "11:00 AM", address: "Edmundston, NB", phone: "", pdf: null },
+  ottawa:      { conf: "5273621716", checkIn: "3:00 PM", checkOut: "12:00 PM", address: "Downtown Ottawa", phone: "", pdf: "/confirmations/ottawa.pdf" },
+  quebec:      { conf: "HM4ZNZN8NK", checkIn: "Self check-in", checkOut: "—", address: "Old Québec (Le 201)", phone: "", pdf: "/confirmations/quebec.pdf" },
+  fredericton: { conf: "5958441912", checkIn: "3:00 PM", checkOut: "11:00 AM", address: "659 Queen St, Fredericton", phone: "", pdf: "/confirmations/fredericton.pdf" },
+  pei:         { conf: "HMWZ4345H3", checkIn: "Self check-in (keypad)", checkOut: "—", address: "New Glasgow, PEI", phone: "", pdf: "/confirmations/pei.pdf" },
+  capebreton:  { conf: "HMEDHMP52E", checkIn: "Self check-in (lockbox)", checkOut: "—", address: "Petit Étang, NS", phone: "", pdf: "/confirmations/capebreton.pdf" },
+  halifax:     { conf: "6795905494", checkIn: "3:00 PM", checkOut: "12:00 PM", address: "Downtown Halifax", phone: "", pdf: "/confirmations/halifax.pdf" },
+  edmundston:  { conf: "6028590360", checkIn: "3:00 PM", checkOut: "11:00 AM", address: "Edmundston, NB", phone: "", pdf: "/confirmations/edmundston.pdf" },
   montreal:    { conf: "—", checkIn: "—", checkOut: "—", address: "Montréal — to book", phone: "", pdf: null }
 };
 
