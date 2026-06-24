@@ -4,7 +4,9 @@
 **/.vite
 **/.env
 **/.env.*
-**/data
+# only the server's runtime data (SQLite DB + confirmation PDFs) — NOT web/src/data,
+# which is frontend source the Vite build needs. Don't broaden this back to **/data.
+server/data
 .git
 .github
 chats
