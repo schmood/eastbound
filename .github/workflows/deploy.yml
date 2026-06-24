@@ -11,6 +11,8 @@ on:
       - "Dockerfile"
       - ".dockerignore"
       - ".github/workflows/deploy.yml"
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -45,7 +47,9 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          push: true
+          # On a PR, build only (it's the green-CI gate for auto-merge); push the
+          # image only on pushes to main.
+          push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha

@@ -6,7 +6,7 @@
    which we'll have plenty of on the Cabot Trail. /api requests bypass the
    worker entirely (the app handles note sync + its own offline outbox), and
    Google Maps / Fonts are cross-origin and pass straight through. */
-var CACHE = "eastbound-v1";
+var CACHE = "eastbound-v2";
 var SHELL = [
   "/",
   "/index.html",
@@ -55,6 +55,32 @@ self.addEventListener("fetch", function (e) {
         // For SPA navigations, fall back to the cached shell.
         return hit || (e.request.mode === "navigate" ? caches.match("/index.html") : undefined);
       });
+    })
+  );
+});
+
+// --- web push: the daily trip-fact notification ---
+self.addEventListener("push", function (e) {
+  var data = {};
+  try { data = e.data ? e.data.json() : {}; } catch (err) { data = { body: e.data && e.data.text() }; }
+  var opts = {
+    body: data.body || "",
+    icon: "/icons/icon-192.png",
+    badge: "/icons/icon-192.png",
+    data: { url: data.url || "/" }
+  };
+  e.waitUntil(self.registration.showNotification(data.title || "Eastbound", opts));
+});
+
+self.addEventListener("notificationclick", function (e) {
+  e.notification.close();
+  var target = (e.notification.data && e.notification.data.url) || "/";
+  e.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then(function (list) {
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].url.indexOf(target) >= 0 && "focus" in list[i]) return list[i].focus();
+      }
+      return self.clients.openWindow(target);
     })
   );
 });

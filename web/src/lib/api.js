@@ -44,5 +44,11 @@ export const api = {
   },
   getNotes() { return http("GET", "/notes"); },
   addNote(note) { return http("POST", "/notes", note); },
-  delNote(id) { return http("DELETE", "/notes/" + encodeURIComponent(id)); }
+  delNote(id) { return http("DELETE", "/notes/" + encodeURIComponent(id)); },
+
+  // web push (daily trip facts)
+  async pushKey() { const r = await http("GET", "/push/key"); return r && r.key; },
+  subscribePush(subscription) { return http("POST", "/push/subscribe", { subscription }); },
+  unsubscribePush(endpoint) { return http("POST", "/push/unsubscribe", { endpoint }); },
+  testPush() { return http("POST", "/push/test"); }
 };
