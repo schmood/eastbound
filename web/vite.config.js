@@ -8,9 +8,13 @@ export default defineConfig({
   base: "/",
   plugins: [react()],
   server: {
+    // bind all interfaces so phones on the same Wi‑Fi can open http://<LAN-IP>:5173
+    host: true,
     port: 5173,
     proxy: {
-      "/api": { target: "http://localhost:8080", changeOrigin: true }
+      "/api": { target: "http://localhost:8080", changeOrigin: true },
+      // confirmation PDFs are served by the backend off the data volume
+      "/confirmations": { target: "http://localhost:8080", changeOrigin: true }
     }
   },
   build: {

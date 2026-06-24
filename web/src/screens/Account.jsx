@@ -20,7 +20,6 @@ export default function Account() {
         <Avatar person={user} size="xl" />
         <div className="me-b">
           <div className="me-name">{user.name}</div>
-          <div className="me-email">{user.email}</div>
         </div>
       </div>
 

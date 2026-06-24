@@ -7,7 +7,8 @@ node_modules/
 # local env + runtime data
 **/.env
 !**/.env.example
-**/data/
+# the server's runtime data only (SQLite DB + confirmation PDFs). Do NOT broaden
+# this to **/data/ — that also matches web/src/data/, the frontend's content layer.
 server/data/
 
 # OS / editor cruft

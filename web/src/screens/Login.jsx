@@ -50,7 +50,7 @@ export default function Login() {
           {PEOPLE.map((p) => (
             <button className="login__acct" key={p.id} disabled={busy} onClick={() => submit(p)}>
               <Avatar person={p} size="lg" />
-              <span className="login__acct-b"><b>{p.name}</b><span>{p.email}</span></span>
+              <span className="login__acct-b"><b>{p.name}</b></span>
               <span className="login__chev">›</span>
             </button>
           ))}

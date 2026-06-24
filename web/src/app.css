@@ -5,6 +5,9 @@
    phone shell so we can simulate the on-the-road experience. */
 
 :root {
+  /* Light-only app — declare the scheme so browsers don't auto-darken it
+     (Android Chrome "Auto Dark Theme") when the device is in dark mode. */
+  color-scheme: only light;
   --paper: #f7f3ec;
   --paper-2: #fffdf8;
   --card: #ffffff;
