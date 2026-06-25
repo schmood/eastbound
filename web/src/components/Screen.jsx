@@ -1,21 +1,10 @@
-/* Screen.jsx — the per-screen chrome: status bar (top of the phone), and a
-   Screen wrapper that draws the app bar + the scrollable content area. */
+/* Screen.jsx — the per-screen chrome: a Screen wrapper that draws the app bar
+   and the scrollable content area. (No fake status bar — an installed PWA shows
+   the real OS status bar, and the browser view doesn't need a faux one.) */
 import { useRef, useLayoutEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Avatar } from "./ui.jsx";
 import { useAuth } from "../auth.jsx";
-import { useTrip } from "../trip.jsx";
-
-export function StatusBar() {
-  const { now } = useTrip();
-  const time = now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }).replace(/\s?[AP]M/i, "");
-  return (
-    <div className="statusbar">
-      <span id="sb-time">{time}</span>
-      <span className="sb-right">Eastbound&nbsp;●</span>
-    </div>
-  );
-}
 
 export function Screen({ title, sub, showBack, children }) {
   const { user } = useAuth();
