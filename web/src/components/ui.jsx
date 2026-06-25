@@ -1,4 +1,5 @@
 /* ui.jsx — small presentational primitives shared across screens. */
+import { useState } from "react";
 import { Icon } from "../lib/icons.jsx";
 
 export function SectionTitle({ children }) {
@@ -15,10 +16,17 @@ export function Pill({ kind, children }) {
 }
 
 export function Avatar({ person, size, className }) {
+  const [imgFailed, setImgFailed] = useState(false);
   if (!person) return null;
   const sz = size === "lg" ? " avatar--lg" : size === "xl" ? " avatar--xl" : "";
+  const cls = "avatar" + sz + (className ? " " + className : "");
+  // a photo if the person has one (web/src/data/people.js → `avatar`); on a
+  // missing/broken image, fall back to the coloured initials.
+  if (person.avatar && !imgFailed) {
+    return <img className={cls + " avatar--img"} src={person.avatar} alt={person.name || ""} onError={() => setImgFailed(true)} />;
+  }
   return (
-    <span className={"avatar" + sz + (className ? " " + className : "")} style={{ background: person.color }}>
+    <span className={cls} style={{ background: person.color }}>
       {person.initials}
     </span>
   );

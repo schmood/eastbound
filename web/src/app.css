@@ -375,6 +375,7 @@ img { display: block; max-width: 100%; }
 }
 .avatar--lg { width: 46px; height: 46px; font-size: 1.15rem; }
 .avatar--xl { width: 62px; height: 62px; font-size: 1.6rem; }
+.avatar--img { object-fit: cover; }
 
 /* appbar profile button */
 .appbar__me { margin-left: auto; display: grid; place-items: center; }
@@ -487,6 +488,11 @@ a.jr-day__t:active { opacity: .6; }
 .wx-dt { font-size: .92rem; font-weight: 700; }
 .wx-dt i { font-style: normal; color: var(--ink-faint); font-weight: 600; margin-left: 3px; }
 .wx-sample { margin-top: 12px; font-size: .68rem; letter-spacing: .04em; color: var(--ink-faint); text-align: center; }
+/* live 7-day strip, each day tagged with the city we'll be in */
+.wx-7day { display: flex; gap: 6px; margin-top: 14px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.wx-7day .wx-d { flex: 0 0 56px; }
+.wx-city { font-size: .56rem; font-weight: 600; color: var(--ink-faint); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wx-loading { padding: 20px 6px; text-align: center; color: var(--ink-soft); font-size: .9rem; }
 /* day-detail single-day chip */
 .wx-chip { display: flex; align-items: center; gap: 11px; padding: 12px 14px; border-radius: 13px; margin-bottom: 14px; background: var(--card); box-shadow: var(--shadow); border: 1px solid var(--line-soft); }
 .wx-chip svg { width: 26px; height: 26px; flex: none; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }

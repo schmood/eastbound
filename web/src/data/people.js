@@ -4,10 +4,10 @@
    PEOPLE_IDS) and the `author` stored on each note; `name` is what shows on
    screen, `color`/`initials` drive the avatar. */
 export const PEOPLE = [
-  { id: "attila",   name: "Attila", color: "#3b6ea5", initials: "A" },
-  { id: "jennifer", name: "Jen",    color: "#c0567e", initials: "J" },
-  { id: "vera",     name: "Vera",   color: "#4e9a6b", initials: "V" },
-  { id: "hazel",    name: "Hazel",  color: "#d08c34", initials: "H" }
+  { id: "attila",   name: "Attila", color: "#3b6ea5", initials: "A", avatar: "/avatars/attila.png" },
+  { id: "jennifer", name: "Jen",    color: "#c0567e", initials: "J", avatar: "/avatars/jennifer.png" },
+  { id: "vera",     name: "Vera",   color: "#4e9a6b", initials: "V", avatar: "/avatars/vera.png" },
+  { id: "hazel",    name: "Hazel",  color: "#d08c34", initials: "H", avatar: "/avatars/hazel.png" }
 ];
 
 const BY_ID = Object.fromEntries(PEOPLE.map((p) => [p.id, p]));

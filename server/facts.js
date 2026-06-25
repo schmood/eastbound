@@ -55,14 +55,36 @@ export const HOME = "2026-08-15";
 // integer day-number for a YYYY-MM-DD string (UTC midnight), used for diffs + indexing
 function dayNum(ymd) { return Math.floor(Date.parse(ymd + "T00:00:00Z") / 86400000); }
 
-// the notification for a given local date: a countdown/title + the day's fact
+// countdown title variants (pre-trip) — rotated daily so it isn't the same line each morning
+const COUNTDOWN_TITLES = [
+  (n) => `Only ${n} ${n === 1 ? "day" : "days"} until we hit the road! 🧭`,
+  (n) => `${n} ${n === 1 ? "sleep" : "sleeps"} until the Maritimes 🌊`,
+  (n) => `${n} ${n === 1 ? "day" : "days"} until we're Eastbound 🚗💨`,
+  (n) => `T‑minus ${n} ${n === 1 ? "day" : "days"} to the East Coast`,
+  (n) => `Just ${n} ${n === 1 ? "day" : "days"} until the big trip!`,
+  (n) => `${n} ${n === 1 ? "day" : "days"} until the adventure begins ✨`,
+  (n) => `Pack your bags — ${n} ${n === 1 ? "day" : "days"} to go! 🎒`
+];
+// once we're rolling
+const TRIP_TITLES = [
+  (d) => `Day ${d} on the road 🧭`,
+  (d) => `Day ${d} of the adventure ✨`,
+  (d) => `Eastbound · day ${d} 🌊`
+];
+
+// the notification for a given local date: a varied countdown title + the day's fact
 export function factForDate(ymd) {
   const n = dayNum(ymd);
   const fact = FACTS[((n % FACTS.length) + FACTS.length) % FACTS.length];
   const toGo = dayNum(DEPART) - n;
   let title;
-  if (toGo > 0) title = `Eastbound — ${toGo} ${toGo === 1 ? "day" : "days"} to go 🧭`;
-  else if (ymd <= HOME) title = `Eastbound — Day ${n - dayNum(DEPART) + 1} on the road 🧭`;
-  else title = "Eastbound 🧭";
+  if (toGo > 0) {
+    title = COUNTDOWN_TITLES[((n % COUNTDOWN_TITLES.length) + COUNTDOWN_TITLES.length) % COUNTDOWN_TITLES.length](toGo);
+  } else if (ymd <= HOME) {
+    const day = n - dayNum(DEPART) + 1;
+    title = TRIP_TITLES[(day - 1) % TRIP_TITLES.length](day);
+  } else {
+    title = "We made it 🧭 — Eastbound memories";
+  }
   return { title, body: fact };
 }
