@@ -17,8 +17,13 @@ export function Pill({ kind, children }) {
 export function Avatar({ person, size, className }) {
   if (!person) return null;
   const sz = size === "lg" ? " avatar--lg" : size === "xl" ? " avatar--xl" : "";
+  const cls = "avatar" + sz + (className ? " " + className : "");
+  // a photo if the person has one (web/src/data/people.js → `avatar`), else initials
+  if (person.avatar) {
+    return <img className={cls + " avatar--img"} src={person.avatar} alt={person.name || ""} />;
+  }
   return (
-    <span className={"avatar" + sz + (className ? " " + className : "")} style={{ background: person.color }}>
+    <span className={cls} style={{ background: person.color }}>
       {person.initials}
     </span>
   );

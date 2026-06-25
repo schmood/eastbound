@@ -31,10 +31,7 @@ export default function Today() {
           <div className="countdown__lab">{n === 1 ? "day" : "days"} to departure</div>
           <div className="countdown__sub">We roll out <b>{fullDate(d0.date)}</b> — {d0.title}.</div>
         </div>
-        <Link className="btn btn--primary btn--block" style={{ marginBottom: 14 }} to="/day/0">
-          Preview day one <Icon name="route" />
-        </Link>
-        <ForecastCard startIdx={0} loc="opening days" />
+        <ForecastCard />
         <SectionTitle>The route at a glance</SectionTitle>
         <MiniRoute trip={TRIP} />
         <StatsTeaser today={today} />
@@ -75,7 +72,7 @@ export default function Today() {
       {day.drive && <DriveCard drive={day.drive} style={{ marginTop: 6 }} />}
       {day.sunset && <SunsetBanner text={"Sunset " + day.sunset + " — Skyline check-in by 6 PM for the golden-hour hike."} />}
 
-      <ForecastCard startIdx={st.idx} loc={base !== "home" ? STOPS[base].name : "the drive home"} />
+      <ForecastCard />
 
       <SectionTitle>Today’s plan</SectionTitle>
       <div className="card"><div className="nownext">
