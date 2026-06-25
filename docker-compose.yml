@@ -18,6 +18,10 @@ services:
       - FAMILY_PASSWORD=${FAMILY_PASSWORD:?set FAMILY_PASSWORD in .env}
       - PORT=8080
       - DATA_DIR=/data
+      # daily push notifications (optional) — forwarded from .env when present
+      - VAPID_PUBLIC_KEY=${VAPID_PUBLIC_KEY:-}
+      - VAPID_PRIVATE_KEY=${VAPID_PRIVATE_KEY:-}
+      - VAPID_SUBJECT=${VAPID_SUBJECT:-}
     ports:
       - "127.0.0.1:8091:8080"
     volumes:
