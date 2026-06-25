@@ -33,7 +33,7 @@
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html, body { margin: 0; padding: 0; }
+html, body { margin: 0; padding: 0; overflow: hidden; overscroll-behavior: none; }
 body {
   font-family: var(--font-ui);
   color: var(--ink);
@@ -47,7 +47,8 @@ img { display: block; max-width: 100%; }
 
 /* ---------- app shell (phone-first; a centered column on larger screens) ---------- */
 .shell {
-  min-height: 100vh;
+  height: 100vh;        /* fallback for browsers without dvh */
+  height: 100dvh;       /* fill the *visible* viewport (Android URL-bar safe) */
   display: flex; justify-content: center;
   background: var(--paper);
 }
@@ -55,7 +56,8 @@ img { display: block; max-width: 100%; }
   position: relative;
   width: 100%;
   max-width: 480px;
-  height: 100vh;
+  height: 100vh;        /* fallback for browsers without dvh */
+  height: 100dvh;       /* track the dynamic viewport so the header + tab bar stay pinned */
   background: var(--paper);
   overflow: hidden;
   display: flex; flex-direction: column;
@@ -89,6 +91,7 @@ img { display: block; max-width: 100%; }
 /* ---------- scroll area ---------- */
 .screen {
   flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;   /* keep scroll inside .screen; don't chain to the page */
   padding: 4px 18px 26px;
   background: var(--paper);
 }
