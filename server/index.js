@@ -113,14 +113,21 @@ app.post("/api/push/test", requireAuth, async (req, res) => {
 // confirmation PDFs live on the persistent volume (drop files in data/confirmations/)
 app.use("/confirmations", express.static(CONF_DIR, { maxAge: "1h" }));
 
-// the built frontend
-app.use(express.static(WEB_DIR, { maxAge: "1h", index: false }));
+// the built frontend. The service worker + entry HTML must always revalidate so
+// SW/app updates roll out immediately; content-hashed assets can cache hard.
+app.use(express.static(WEB_DIR, {
+  index: false,
+  setHeaders(res, p) {
+    if (p.endsWith("sw.js") || p.endsWith("index.html")) res.setHeader("Cache-Control", "no-cache");
+    else res.setHeader("Cache-Control", "public, max-age=86400");
+  }
+}));
 
 // SPA fallback: any non-API GET serves index.html (hash router does the rest)
 app.get("*", (req, res, next) => {
   if (req.path.startsWith("/api/")) return next();
   const index = join(WEB_DIR, "index.html");
-  if (existsSync(index)) return res.sendFile(index);
+  if (existsSync(index)) { res.setHeader("Cache-Control", "no-cache"); return res.sendFile(index); }
   res.status(404).send("Eastbound frontend not built yet (web/dist missing).");
 });
 

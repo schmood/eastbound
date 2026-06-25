@@ -5,7 +5,6 @@ import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./auth.jsx";
 import { TripProvider } from "./trip.jsx";
 import { NotesProvider } from "./notes.jsx";
-import { StatusBar } from "./components/Screen.jsx";
 import { TabBar } from "./components/TabBar.jsx";
 import { SimBar } from "./components/SimBar.jsx";
 import Login from "./screens/Login.jsx";
@@ -41,7 +40,6 @@ function Shell() {
   if (!user) {
     return (
       <div className="shell"><div className="phone">
-        <StatusBar />
         <div id="main" style={mainStyle}><Login /></div>
       </div></div>
     );
@@ -49,7 +47,6 @@ function Shell() {
   return (
     <NotesProvider>
       <div className="shell"><div className="phone">
-        <StatusBar />
         <div id="main" style={mainStyle}><AppRoutes /></div>
         <TabBar />
         <SimBar />
