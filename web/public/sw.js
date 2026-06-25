@@ -6,7 +6,7 @@
    which we'll have plenty of on the Cabot Trail. /api requests bypass the
    worker entirely (the app handles note sync + its own offline outbox), and
    Google Maps / Fonts are cross-origin and pass straight through. */
-var CACHE = "eastbound-v2";
+var CACHE = "eastbound-v3";
 var SHELL = [
   "/",
   "/index.html",
@@ -14,7 +14,8 @@ var SHELL = [
   "/icons/icon-192.png",
   "/icons/icon-512.png",
   "/icons/apple-touch-icon.png",
-  "/icons/favicon-32.png"
+  "/icons/favicon-32.png",
+  "/icons/badge.png"
 ];
 
 self.addEventListener("install", function (e) {
@@ -66,7 +67,7 @@ self.addEventListener("push", function (e) {
   var opts = {
     body: data.body || "",
     icon: "/icons/icon-192.png",
-    badge: "/icons/icon-192.png",
+    badge: "/icons/badge.png",
     data: { url: data.url || "/" }
   };
   e.waitUntil(self.registration.showNotification(data.title || "Eastbound", opts));
